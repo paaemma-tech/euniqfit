@@ -1,0 +1,907 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1B3E30">
+<meta name="description" content="EUNIQ FIT — Luxury in Every Detail.">
+<title>EUNIQ FIT | Luxury in Every Detail</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --green:#1B3E30;
+  --dark:#10291F;
+  --gold:#C5A044;
+  --cream:#F7F5EF;
+  --white:#fff;
+  --ink:#20251F;
+  --muted:#777B74;
+  --border:#E7E4DB;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--cream)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+
+.announcement{
+  background:var(--dark);color:white;text-align:center;
+  padding:10px;font-size:10px;letter-spacing:2px;text-transform:uppercase
+}
+
+header{
+  background:var(--green);color:white;position:sticky;top:0;
+  z-index:50;border-bottom:1px solid rgba(255,255,255,.12)
+}
+
+.nav{
+  max-width:1400px;margin:auto;min-height:86px;padding:12px 5%;
+  display:flex;align-items:center;justify-content:space-between;gap:25px
+}
+
+.brand{display:flex;align-items:center}
+.brand-logo{width:145px;height:62px;object-fit:contain}
+.brand-fallback{display:none;color:var(--gold);font:22px 'Playfair Display';letter-spacing:2px}
+
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{
+  font-size:11px;text-transform:uppercase;letter-spacing:1.5px
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-actions{display:flex;align-items:center;gap:18px}
+.cart-button,.menu-button{background:none;border:0;color:white;font-size:12px}
+.cart-count{
+  display:inline-grid;place-items:center;background:var(--gold);
+  color:var(--dark);border-radius:50%;width:20px;height:20px;
+  margin-left:5px;font-size:10px;font-weight:bold
+}
+.menu-button{display:none;font-size:22px}
+
+.hero{
+  min-height:650px;
+  background:linear-gradient(90deg,rgba(12,28,20,.85),rgba(12,28,20,.18)),
+  url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=2000&q=90') center 35%/cover;
+  display:flex;align-items:center;color:white;padding:80px 9%
+}
+.hero-content{max-width:680px}
+.eyebrow{
+  color:var(--gold);letter-spacing:4px;font-size:11px;
+  text-transform:uppercase;margin-bottom:24px
+}
+.hero h1{
+  font:400 clamp(48px,7vw,88px)/1.08 'Playfair Display',serif;
+  margin-bottom:25px
+}
+.hero p{
+  max-width:470px;color:rgba(255,255,255,.83);
+  line-height:1.9;font-size:14px;margin-bottom:35px
+}
+.gold-button{
+  display:inline-block;background:var(--gold);color:var(--dark);
+  border:1px solid var(--gold);padding:16px 30px;
+  font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:bold
+}
+.gold-button:hover{background:transparent;color:var(--gold)}
+
+.section{max-width:1400px;margin:auto;padding:95px 5%}
+.section-heading{text-align:center;margin-bottom:45px}
+.section-heading .eyebrow{margin-bottom:13px}
+.section-heading h2{
+  font:400 clamp(32px,4vw,48px) 'Playfair Display',serif;color:var(--green)
+}
+.section-heading p{color:var(--muted);font-size:13px;margin-top:12px}
+
+.collections{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.collection-card{min-height:430px;position:relative;overflow:hidden;color:white;background:var(--green)}
+.collection-card img{
+  width:100%;height:100%;min-height:430px;object-fit:cover;
+  display:block;transition:transform .7s
+}
+.collection-card:hover img{transform:scale(1.04)}
+.collection-overlay{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:38px;
+  background:linear-gradient(transparent 25%,rgba(0,0,0,.68))
+}
+.collection-overlay span{color:var(--gold);letter-spacing:3px;font-size:10px}
+.collection-overlay h3{font:400 38px 'Playfair Display';margin:10px 0 18px}
+.collection-overlay a{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  width:fit-content;border-bottom:1px solid var(--gold);padding-bottom:7px
+}
+
+.shop-section,.foundation{background:#EFEEE8}
+.filters{
+  display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:35px
+}
+.filter-button{
+  border:1px solid #D7D4C9;background:transparent;color:var(--green);
+  padding:10px 20px;font-size:10px;letter-spacing:1px;text-transform:uppercase
+}
+.filter-button.active,.filter-button:hover{background:var(--green);color:white}
+
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 20px}
+.product-card{min-width:0}
+.product-image{position:relative;overflow:hidden;background:#E4E1D8;aspect-ratio:3/4}
+.product-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.product-card:hover .product-image img{transform:scale(1.04)}
+.product-label{
+  position:absolute;top:14px;left:14px;background:var(--green);color:white;
+  padding:7px 10px;font-size:9px;letter-spacing:1px;text-transform:uppercase
+}
+.product-info{padding:17px 2px}
+.product-info h3{font:500 19px 'Playfair Display';color:var(--green)}
+.product-info p{color:var(--muted);font-size:11px;margin:6px 0 12px}
+.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.price{font-weight:bold;font-size:14px}
+.add-button{
+  background:var(--green);color:white;border:1px solid var(--green);
+  padding:10px 14px;font-size:9px;letter-spacing:1px;text-transform:uppercase
+}
+.add-button:hover{background:var(--gold);color:var(--dark);border-color:var(--gold)}
+
+.craft-section{
+  background:var(--green);color:white;display:grid;
+  grid-template-columns:1fr 1fr;min-height:520px
+}
+.craft-image{
+  min-height:420px;
+  background:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=85') center/cover
+}
+.craft-content{padding:80px 12%;display:flex;flex-direction:column;justify-content:center}
+.craft-content h2{font:400 clamp(35px,4vw,53px)/1.2 'Playfair Display';margin-bottom:25px}
+.craft-content p{color:rgba(255,255,255,.78);font-size:13px;line-height:2;margin-bottom:18px}
+.brand-signoff{font:20px 'Playfair Display';color:var(--gold);margin-top:12px}
+
+.foundation .section{padding-top:85px;padding-bottom:90px}
+.brand-story{max-width:850px;margin:0 auto 55px;text-align:center}
+.brand-story p{font-size:14px;line-height:2.05;color:#555B54;margin-bottom:15px}
+.purpose-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:55px}
+.purpose-card{background:var(--cream);padding:35px;border:1px solid var(--border)}
+.purpose-card .eyebrow{margin-bottom:13px}
+.purpose-card h3{font:400 29px 'Playfair Display';color:var(--green);margin-bottom:12px}
+.purpose-card p{font-size:13px;line-height:1.9;color:var(--muted)}
+.values-title{
+  text-align:center;font:400 34px 'Playfair Display';
+  color:var(--green);margin-bottom:25px
+}
+.values-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.value-card{background:var(--green);color:white;padding:24px 17px;min-height:155px}
+.value-card span{color:var(--gold);font-size:10px;letter-spacing:2px}
+.value-card h4{font:400 19px 'Playfair Display';margin:12px 0 8px}
+.value-card p{font-size:11px;line-height:1.7;color:rgba(255,255,255,.72)}
+.foundation-table-wrap{margin-top:60px}
+.foundation-table-wrap h3{
+  text-align:center;font:400 34px 'Playfair Display';
+  color:var(--green);margin-bottom:24px
+}
+.foundation-table{width:100%;border-collapse:collapse;background:var(--cream);font-size:13px}
+.foundation-table th,.foundation-table td{
+  text-align:left;padding:15px 18px;border-bottom:1px solid var(--border)
+}
+.foundation-table th{
+  background:var(--green);color:white;font-size:10px;
+  font-weight:500;letter-spacing:1px;text-transform:uppercase
+}
+.foundation-table td:first-child{font-weight:bold;color:var(--green);width:30%}
+
+.newsletter{text-align:center;padding:90px 20px;background:var(--cream)}
+.newsletter h2{font:400 40px 'Playfair Display';color:var(--green)}
+.newsletter p{color:var(--muted);margin:13px auto 25px;font-size:13px}
+.newsletter button{
+  background:var(--green);color:white;padding:15px 25px;
+  font-size:10px;letter-spacing:2px;text-transform:uppercase;border:0
+}
+
+footer{background:var(--dark);color:white;padding:65px 6% 25px}
+.footer-grid{
+  max-width:1300px;margin:auto;display:grid;
+  grid-template-columns:2fr 1fr 1fr;gap:45px;padding-bottom:45px
+}
+footer h3{font:400 24px 'Playfair Display';margin-bottom:17px}
+footer p,footer a{color:rgba(255,255,255,.65);font-size:12px;line-height:2.1;display:block}
+footer a:hover{color:var(--gold)}
+.footer-bottom{
+  max-width:1300px;margin:auto;padding-top:22px;
+  border-top:1px solid rgba(255,255,255,.15);
+  display:flex;justify-content:space-between;gap:15px;
+  color:rgba(255,255,255,.5);font-size:10px
+}
+
+.cart-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.5);
+  z-index:100;display:none
+}
+.cart-overlay.open{display:block}
+.cart-panel{
+  position:absolute;right:0;top:0;height:100%;width:min(440px,100%);
+  background:var(--cream);padding:28px;overflow-y:auto
+}
+.cart-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:20px}
+.cart-header h2{font:400 25px 'Playfair Display';color:var(--green)}
+.close-cart{border:0;background:none;font-size:25px;color:var(--green)}
+.cart-items{padding:20px 0}
+.cart-item{display:grid;grid-template-columns:75px 1fr;gap:15px;padding:15px 0;border-bottom:1px solid var(--border)}
+.cart-item img{width:75px;height:95px;object-fit:cover}
+.cart-item h4{color:var(--green);font:500 17px 'Playfair Display';margin-bottom:6px}
+.cart-item p{font-size:11px;color:var(--muted);margin-bottom:7px}
+.quantity-controls{display:flex;align-items:center;gap:12px;margin-top:8px}
+.quantity-controls button{width:25px;height:25px;background:transparent;border:1px solid var(--border)}
+.remove-item{border:0;background:none;color:#9B5147;font-size:10px;margin-top:8px}
+.cart-total{display:flex;justify-content:space-between;font-weight:bold;padding:20px 0;border-top:1px solid var(--border);color:var(--green)}
+.checkout-button{
+  width:100%;background:var(--green);color:white;padding:17px;
+  border:0;text-transform:uppercase;letter-spacing:2px;font-size:10px
+}
+.empty-cart{text-align:center;padding:50px 10px;color:var(--muted);font-size:13px}
+
+.modal{
+  position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.65);
+  display:none;place-items:center;padding:20px
+}
+.modal.open{display:grid}
+.modal-content{
+  width:min(480px,100%);background:var(--cream);padding:30px;
+  max-height:90vh;overflow-y:auto
+}
+.modal-content h2{font:400 30px 'Playfair Display';color:var(--green);margin-bottom:10px}
+.modal-content>p{color:var(--muted);font-size:12px;margin-bottom:20px;line-height:1.7}
+.form-field{margin-bottom:15px}
+.form-field label{
+  display:block;font-size:10px;text-transform:uppercase;
+  letter-spacing:1px;margin-bottom:7px;color:var(--green)
+}
+.form-field input,.form-field select,.form-field textarea{
+  width:100%;border:1px solid var(--border);background:white;
+  padding:13px;outline:0;font-size:12px
+}
+.form-field textarea{min-height:75px;resize:vertical}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--gold)}
+.form-actions{display:flex;gap:10px;margin-top:20px}
+.form-actions button{flex:1}
+.cancel-button{
+  background:transparent;border:1px solid var(--green);color:var(--green);
+  padding:15px;font-size:10px;text-transform:uppercase;letter-spacing:1px
+}
+.toast{
+  position:fixed;bottom:85px;left:50%;transform:translateX(-50%);
+  background:var(--dark);color:white;padding:13px 22px;
+  font-size:12px;z-index:150;display:none
+}
+.toast.show{display:block}
+
+.social-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.social-link{
+  display:flex;align-items:center;gap:12px;padding:15px;
+  background:var(--green);color:white;font-size:12px
+}
+.social-link:hover{background:var(--gold);color:var(--dark)}
+.social-icon{width:25px;height:25px;display:grid;place-items:center;font-size:18px;font-weight:bold}
+.social-note{font-size:11px;color:var(--muted);line-height:1.7;margin-top:18px}
+
+.whatsapp-float{
+  position:fixed;bottom:22px;right:22px;z-index:80;
+  background:#187A48;color:white;width:56px;height:56px;
+  border-radius:50%;display:grid;place-items:center;
+  box-shadow:0 5px 20px rgba(0,0,0,.2);transition:transform .2s
+}
+.whatsapp-float:hover{transform:translateY(-3px)}
+.whatsapp-float svg{width:29px;height:29px;fill:currentColor}
+
+@media(max-width:850px){
+  .nav-links{
+    display:none;position:absolute;top:100%;left:0;width:100%;
+    background:var(--green);padding:25px;flex-direction:column;align-items:flex-start
+  }
+  .nav-links.open{display:flex}
+  .menu-button{display:block}
+  .products{grid-template-columns:repeat(2,1fr)}
+  .craft-section{grid-template-columns:1fr}
+  .craft-image{min-height:380px}
+  .craft-content{padding:60px 8%}
+  .values-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+@media(max-width:600px){
+  .nav{min-height:72px;padding:10px 5%}
+  .brand-logo{width:115px;height:52px}
+  .hero{min-height:570px;padding:60px 7%}
+  .hero h1{font-size:52px}
+  .section{padding:65px 5%}
+  .collections{grid-template-columns:1fr}
+  .collection-card,.collection-card img{min-height:360px}
+  .products{gap:24px 12px}
+  .product-info h3{font-size:16px}
+  .product-bottom{align-items:flex-start;flex-direction:column}
+  .add-button{width:100%}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-grid>div:first-child{grid-column:1/-1}
+  .footer-bottom{flex-direction:column}
+  .purpose-grid{grid-template-columns:1fr}
+  .values-grid{grid-template-columns:1fr 1fr}
+  .foundation-table{font-size:11px}
+  .foundation-table th,.foundation-table td{padding:11px 9px}
+  .whatsapp-float{bottom:15px;right:15px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="announcement">
+  THOUGHTFULLY DESIGNED. BEAUTIFULLY MADE. · LUXURY IN EVERY DETAIL
+</div>
+
+<header>
+<nav class="nav">
+  <a href="#" class="brand" aria-label="EUNIQ FIT home">
+    <img class="brand-logo" src="euniq-fit-logo.png" alt="EUNIQ FIT logo"
+    onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="brand-fallback">EUNIQ FIT</span>
+  </a>
+
+  <div class="nav-links" id="navLinks">
+    <a href="#">Home</a>
+    <a href="#collections">Collections</a>
+    <a href="#shop">Shop</a>
+    <a href="#story">Our Story</a>
+    <a href="#foundation">Our Foundation</a>
+  </div>
+
+  <div class="nav-actions">
+    <button class="cart-button" onclick="toggleCart(true)">
+      BAG <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <button class="menu-button" onclick="toggleMenu()">☰</button>
+  </div>
+</nav>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">THE ART OF REFINED DRESSING</div>
+    <h1>Luxury in<br>Every Detail.</h1>
+    <p>
+      Discover a world where thoughtful design meets exceptional craftsmanship.
+      Fashion created to express your individuality and elevate every moment.
+    </p>
+    <a href="#shop" class="gold-button">Explore the collection</a>
+  </div>
+</section>
+
+<section class="section" id="collections">
+  <div class="section-heading">
+    <div class="eyebrow">DISCOVER EUNIQ FIT</div>
+    <h2>Curated for your expression</h2>
+    <p>Distinctive pieces. Timeless character. Effortless confidence.</p>
+  </div>
+
+  <div class="collections">
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=85" alt="Women's fashion">
+      <div class="collection-overlay">
+        <span>EUNIQ FIT WOMEN</span>
+        <h3>The art of femininity</h3>
+        <a href="#shop" onclick="setFilter('Women')">Discover collection →</a>
+      </div>
+    </div>
+
+    <div class="collection-card">
+      <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=1000&q=85" alt="Men's fashion">
+      <div class="collection-overlay">
+        <span>EUNIQ FIT MEN</span>
+        <h3>Refined by design</h3>
+        <a href="#shop" onclick="setFilter('Men')">Discover collection →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="shop-section" id="shop">
+<section class="section">
+  <div class="section-heading">
+    <div class="eyebrow">THE EUNIQ FIT EDIT</div>
+    <h2>Selected pieces</h2>
+    <p>Explore our latest expressions of style and craftsmanship.</p>
+  </div>
+
+  <div class="filters">
+    <button class="filter-button active" onclick="setFilter('All',this)">All pieces</button>
+    <button class="filter-button" onclick="setFilter('Women',this)">Women</button>
+    <button class="filter-button" onclick="setFilter('Men',this)">Men</button>
+    <button class="filter-button" onclick="setFilter('Unisex',this)">Unisex</button>
+    <button class="filter-button" onclick="setFilter('Heritage',this)">Heritage</button>
+  </div>
+
+  <div class="products" id="products"></div>
+</section>
+</div>
+
+<section class="craft-section" id="story">
+  <div class="craft-image" role="img" aria-label="Fashion craftsmanship"></div>
+
+  <div class="craft-content">
+    <div class="eyebrow">THE EUNIQ FIT STORY</div>
+    <h2>More than fashion.<br>A standard of excellence.</h2>
+
+    <p>EUNIQ FIT is a contemporary fashion brand built on the belief that true luxury lies in the details.</p>
+
+    <p>We bring together modern design, refined aesthetics and exceptional craftsmanship to create timeless fashion for men and women.</p>
+
+    <p>Inspired by both international fashion and contemporary African creativity, we celebrate individuality through thoughtfully designed garments, distinctive silhouettes and meticulous finishing.</p>
+
+    <p>We believe luxury should go beyond appearance. It should be experienced through quality, comfort, confidence and attention to detail.</p>
+
+    <p>Every design reflects our passion for fashion and our commitment to excellence.</p>
+
+    <div class="brand-signoff">EUNIQ FIT — Luxury in Every Detail.</div>
+  </div>
+</section>
+
+<section class="foundation" id="foundation">
+<div class="section">
+  <div class="section-heading">
+    <div class="eyebrow">WHAT DEFINES US</div>
+    <h2>Our brand foundation</h2>
+    <p>The purpose, principles and identity behind every EUNIQ FIT creation.</p>
+  </div>
+
+  <div class="purpose-grid">
+    <article class="purpose-card">
+      <div class="eyebrow">OUR PURPOSE</div>
+      <h3>Our Mission</h3>
+      <p>To create beautifully designed, quality fashion that makes elegance, confidence and individuality accessible.</p>
+    </article>
+
+    <article class="purpose-card">
+      <div class="eyebrow">OUR AMBITION</div>
+      <h3>Our Vision</h3>
+      <p>To become a globally recognized fashion house known for timeless design, exceptional craftsmanship and distinctive identity.</p>
+    </article>
+  </div>
+
+  <h3 class="values-title">Our Core Values</h3>
+
+  <div class="values-grid">
+    <article class="value-card"><span>01</span><h4>Craftsmanship</h4><p>Excellence in every stitch.</p></article>
+    <article class="value-card"><span>02</span><h4>Elegance</h4><p>Beauty through simplicity.</p></article>
+    <article class="value-card"><span>03</span><h4>Quality</h4><p>Never compromising on standards.</p></article>
+    <article class="value-card"><span>04</span><h4>Individuality</h4><p>Celebrating personal expression.</p></article>
+    <article class="value-card"><span>05</span><h4>Innovation</h4><p>Continuously evolving through creativity.</p></article>
+  </div>
+
+  <div class="foundation-table-wrap">
+    <h3>Our Brand at a Glance</h3>
+    <table class="foundation-table">
+      <thead><tr><th>Element</th><th>Brand definition</th></tr></thead>
+      <tbody>
+        <tr><td>Brand name</td><td>EUNIQ FIT</td></tr>
+        <tr><td>Industry</td><td>Fashion and apparel</td></tr>
+        <tr><td>Positioning</td><td>Affordable luxury</td></tr>
+        <tr><td>Audience</td><td>Men and women</td></tr>
+        <tr><td>Aesthetic</td><td>Modern minimalist</td></tr>
+        <tr><td>Inspiration</td><td>International and contemporary African fashion</td></tr>
+        <tr><td>Signature</td><td>Refined craftsmanship and attention to detail</td></tr>
+        <tr><td>Primary colours</td><td>Forest green #1B3E30 and solid gold</td></tr>
+        <tr><td>Slogan</td><td>Luxury in Every Detail.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<section class="newsletter">
+  <div class="eyebrow">BE PART OF OUR WORLD</div>
+  <h2>Stay connected.</h2>
+  <p>Follow EUNIQ FIT for new collections, styling inspiration and enquiries.</p>
+  <button onclick="openSocials()">Connect with us</button>
+</section>
+
+</main>
+
+<footer id="contact">
+  <div class="footer-grid">
+    <div>
+      <h3>EUNIQ FIT</h3>
+      <p>Luxury in Every Detail.</p>
+      <p>Contemporary fashion shaped by thoughtful design, individuality and exceptional craftsmanship.</p>
+    </div>
+    <div>
+      <h3>Explore</h3>
+      <a href="#shop">Shop all</a>
+      <a href="#collections">Collections</a>
+      <a href="#story">Our story</a>
+      <a href="#foundation">Our foundation</a>
+    </div>
+    <div>
+      <h3>Connect</h3>
+      <a href="#" onclick="openSocials();return false">Our social platforms</a>
+      <a href="https://wa.me/233533750626?text=Hello%20EUNIQ%20FIT%2C%20I%27d%20love%20to%20make%20an%20enquiry." target="_blank" rel="noopener">WhatsApp us</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© <span id="year"></span> EUNIQ FIT. All rights reserved.</span>
+    <span>CRAFTED WITH PURPOSE. WORN WITH CONFIDENCE.</span>
+  </div>
+</footer>
+
+<!-- SHOPPING CART -->
+<div class="cart-overlay" id="cartOverlay" onclick="outsideCart(event)">
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h2>Your shopping bag</h2>
+      <button class="close-cart" onclick="toggleCart(false)">×</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-total"><span>Subtotal</span><span id="cartTotal">GH₵0.00</span></div>
+    <button class="checkout-button" onclick="openCheckout()">Continue to order</button>
+  </div>
+</div>
+
+<!-- PRODUCT OPTIONS -->
+<div class="modal" id="productModal">
+  <div class="modal-content">
+    <h2 id="modalProductName">Product name</h2>
+    <p id="modalProductPrice"></p>
+
+    <div class="form-field">
+      <label for="productSize">Select size</label>
+      <select id="productSize">
+        <option value="">Choose your size</option>
+        <option>XS</option><option>S</option><option>M</option>
+        <option>L</option><option>XL</option><option>XXL</option>
+        <option>Custom size</option>
+      </select>
+    </div>
+
+    <div class="form-field">
+      <label for="productColour">Select colour</label>
+      <select id="productColour">
+        <option value="">Choose a colour</option>
+        <option>Black</option><option>White</option>
+        <option>Forest Green</option><option>Gold</option>
+        <option>Brown</option><option>Other / Custom</option>
+      </select>
+    </div>
+
+    <div class="form-field">
+      <label for="productQuantity">Quantity</label>
+      <input type="number" id="productQuantity" min="1" value="1">
+    </div>
+
+    <div class="form-actions">
+      <button class="cancel-button" onclick="closeProductModal()">Cancel</button>
+      <button class="checkout-button" onclick="confirmAddToCart()">Add to bag</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKOUT -->
+<div class="modal" id="checkoutModal">
+  <div class="modal-content">
+    <h2>Complete your order</h2>
+    <p>Enter your details. We'll prepare your order enquiry for EUNIQ FIT.</p>
+
+    <form id="checkoutForm">
+      <div class="form-field">
+        <label for="customerName">Full name</label>
+        <input id="customerName" required placeholder="Your full name">
+      </div>
+
+      <div class="form-field">
+        <label for="customerPhone">Phone / WhatsApp</label>
+        <input id="customerPhone" type="tel" required placeholder="+233...">
+      </div>
+
+      <div class="form-field">
+        <label for="customerEmail">Email address</label>
+        <input id="customerEmail" type="email" placeholder="you@example.com">
+      </div>
+
+      <div class="form-field">
+        <label for="customerLocation">Delivery location</label>
+        <input id="customerLocation" required placeholder="Town, city, country">
+      </div>
+
+      <div class="form-field">
+        <label for="customerNotes">Additional instructions</label>
+        <textarea id="customerNotes" placeholder="Delivery preferences, custom measurements, etc."></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="cancel-button" onclick="closeCheckout()">Back</button>
+        <button type="submit" class="checkout-button">Send order enquiry</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- SOCIAL MEDIA POPUP -->
+<div class="modal" id="socialModal" onclick="closeSocialsOutside(event)">
+  <div class="modal-content">
+    <h2>Connect with EUNIQ FIT</h2>
+    <p>Choose your preferred platform. We'd love to hear from you.</p>
+
+    <div class="social-grid">
+      <a class="social-link" href="https://wa.me/233533750626?text=Hello%20EUNIQ%20FIT%2C%20I%27d%20love%20to%20connect." target="_blank" rel="noopener">
+        <span class="social-icon">◉</span> WhatsApp
+      </a>
+      <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener">
+        <span class="social-icon">◎</span> Instagram
+      </a>
+      <a class="social-link" href="https://www.snapchat.com/" target="_blank" rel="noopener">
+        <span class="social-icon">👻</span> Snapchat
+      </a>
+      <a class="social-link" href="https://www.tiktok.com/" target="_blank" rel="noopener">
+        <span class="social-icon">♪</span> TikTok
+      </a>
+    </div>
+
+    <p class="social-note">
+      WhatsApp is connected to our business number. Instagram, Snapchat and TikTok are temporary links until you provide your official profiles.
+    </p>
+
+    <div class="form-actions">
+      <button class="checkout-button" onclick="closeSocials()">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Added to your shopping bag.</div>
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a class="whatsapp-float"
+   href="https://wa.me/233533750626?text=Hello%20EUNIQ%20FIT%2C%20I%27d%20like%20to%20make%20an%20enquiry."
+   target="_blank" rel="noopener" aria-label="Chat with EUNIQ FIT on WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true">
+    <path d="M16 .8A15 15 0 0 0 3.1 23.5L1 31l7.7-2A15 15 0 1 0 16 .8zm0 27.4a12.3 12.3 0 0 1-6.3-1.7l-.5-.3-4.6 1.2 1.2-4.5-.3-.5A12.3 12.3 0 1 1 16 28.2zm6.8-9.2c-.4-.2-2.2-1.1-2.5-1.2-.3-.1-.6-.2-.8.2-.2.4-1 1.2-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8l.6-.7c.2-.2.2-.4.4-.6.1-.2.1-.5 0-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.7.1-1 .5-.4.4-1.3 1.3-1.3 3.1s1.3 3.5 1.5 3.7c.2.2 2.6 4 6.3 5.6.9.4 1.6.6 2.1.7.9.3 1.7.2 2.3.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8-.1-.1-.4-.2-.8-.4z"/>
+  </svg>
+</a>
+
+<script>
+const WHATSAPP_URL = "https://wa.me/233533750626";
+
+const products = [
+  {
+    id:1,name:"The Atelier Two-Piece",category:"Women",
+    price:850,description:"Contemporary two-piece set",
+    label:"Featured",
+    image:"https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    id:2,name:"The Signature Shirt",category:"Men",
+    price:420,description:"Refined everyday tailoring",
+    label:"New arrival",
+    image:"https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    id:3,name:"The Form Dress",category:"Women",
+    price:690,description:"An expression of elegance",
+    label:"Bestseller",
+    image:"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    id:4,name:"The Relaxed Trouser",category:"Men",
+    price:480,description:"Modern relaxed silhouette",
+    label:"",
+    image:"https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    id:5,name:"The Modern Kaftan",category:"Heritage",
+    price:950,description:"Contemporary heritage design",
+    label:"Signature",
+    image:"https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0?auto=format&fit=crop&w=900&q=85"
+  },
+  {
+    id:6,name:"The Everyday Tee",category:"Unisex",
+    price:260,description:"Understated everyday essential",
+    label:"",
+    image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=85"
+  }
+];
+
+let cart=[];
+let selectedProduct=null;
+let activeFilter="All";
+
+const money=amount=>new Intl.NumberFormat("en-GH",{
+  style:"currency",currency:"GHS",minimumFractionDigits:2
+}).format(amount);
+
+function renderProducts(){
+  const shown=activeFilter==="All"
+    ?products
+    :products.filter(p=>p.category===activeFilter);
+
+  document.getElementById("products").innerHTML=shown.map(p=>`
+    <article class="product-card">
+      <div class="product-image">
+        <img src="${p.image}" alt="${p.name}" loading="lazy">
+        ${p.label?`<span class="product-label">${p.label}</span>`:""}
+      </div>
+      <div class="product-info">
+        <h3>${p.name}</h3>
+        <p>${p.description}</p>
+        <div class="product-bottom">
+          <span class="price">${money(p.price)}</span>
+          <button class="add-button" onclick="openProductModal(${p.id})">Select options</button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function setFilter(category,button){
+  activeFilter=category;
+  document.querySelectorAll(".filter-button").forEach(b=>b.classList.remove("active"));
+  if(button)button.classList.add("active");
+  else document.querySelectorAll(".filter-button").forEach(b=>{
+    if(b.textContent.trim().toLowerCase()===category.toLowerCase())b.classList.add("active");
+  });
+  renderProducts();
+}
+
+function openProductModal(id){
+  selectedProduct=products.find(p=>p.id===id);
+  document.getElementById("modalProductName").textContent=selectedProduct.name;
+  document.getElementById("modalProductPrice").textContent=money(selectedProduct.price);
+  document.getElementById("productSize").value="";
+  document.getElementById("productColour").value="";
+  document.getElementById("productQuantity").value=1;
+  document.getElementById("productModal").classList.add("open");
+}
+
+function closeProductModal(){
+  document.getElementById("productModal").classList.remove("open");
+}
+
+function confirmAddToCart(){
+  const size=document.getElementById("productSize").value;
+  const colour=document.getElementById("productColour").value;
+  const quantity=Number(document.getElementById("productQuantity").value);
+
+  if(!size||!colour){alert("Please select both size and colour.");return}
+  if(!Number.isInteger(quantity)||quantity<1){alert("Please enter a valid quantity.");return}
+
+  const existing=cart.find(i=>i.id===selectedProduct.id&&i.size===size&&i.colour===colour);
+
+  if(existing)existing.quantity+=quantity;
+  else cart.push({...selectedProduct,size,colour,quantity});
+
+  closeProductModal();
+  renderCart();
+  showToast("Added to your shopping bag.");
+}
+
+function renderCart(){
+  const count=cart.reduce((n,i)=>n+i.quantity,0);
+  const total=cart.reduce((n,i)=>n+i.price*i.quantity,0);
+
+  document.getElementById("cartCount").textContent=count;
+  document.getElementById("cartTotal").textContent=money(total);
+
+  document.getElementById("cartItems").innerHTML=cart.length
+    ?cart.map((i,n)=>`
+      <div class="cart-item">
+        <img src="${i.image}" alt="${i.name}">
+        <div>
+          <h4>${i.name}</h4>
+          <p>Size: ${i.size} · Colour: ${i.colour}</p>
+          <strong>${money(i.price*i.quantity)}</strong>
+          <div class="quantity-controls">
+            <button onclick="changeQuantity(${n},-1)">−</button>
+            <span>${i.quantity}</span>
+            <button onclick="changeQuantity(${n},1)">+</button>
+          </div>
+          <button class="remove-item" onclick="removeItem(${n})">Remove</button>
+        </div>
+      </div>
+    `).join("")
+    :'<div class="empty-cart">Your shopping bag is empty.<br><br>Discover something exceptional.</div>';
+}
+
+function changeQuantity(index,change){
+  cart[index].quantity+=change;
+  if(cart[index].quantity<=0)cart.splice(index,1);
+  renderCart();
+}
+
+function removeItem(index){
+  cart.splice(index,1);
+  renderCart();
+}
+
+function toggleCart(open){
+  document.getElementById("cartOverlay").classList.toggle("open",open);
+}
+
+function outsideCart(event){
+  if(event.target.id==="cartOverlay")toggleCart(false);
+}
+
+function openCheckout(){
+  if(!cart.length){alert("Your shopping bag is empty.");return}
+  toggleCart(false);
+  document.getElementById("checkoutModal").classList.add("open");
+}
+
+function closeCheckout(){
+  document.getElementById("checkoutModal").classList.remove("open");
+}
+
+function openSocials(){
+  document.getElementById("socialModal").classList.add("open");
+}
+
+function closeSocials(){
+  document.getElementById("socialModal").classList.remove("open");
+}
+
+function closeSocialsOutside(event){
+  if(event.target.id==="socialModal")closeSocials();
+}
+
+function toggleMenu(){
+  document.getElementById("navLinks").classList.toggle("open");
+}
+
+function showToast(message){
+  const t=document.getElementById("toast");
+  t.textContent=message;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2500);
+}
+
+document.getElementById("checkoutForm").addEventListener("submit",function(event){
+  event.preventDefault();
+
+  if(!cart.length){
+    alert("Your shopping bag is empty.");
+    closeCheckout();
+    return;
+  }
+
+  const name=document.getElementById("customerName").value.trim();
+  const phone=document.getElementById("customerPhone").value.trim();
+  const email=document.getElementById("customerEmail").value.trim();
+  const location=document.getElementById("customerLocation").value.trim();
+  const notes=document.getElementById("customerNotes").value.trim();
+
+  const total=cart.reduce((sum,i)=>sum+i.price*i.quantity,0);
+
+  let message="*EUNIQ FIT — NEW ORDER ENQUIRY*\n\n";
+  message+=`*Customer:* ${name}\n*Phone:* ${phone}\n*Email:* ${email||"Not provided"}\n*Delivery location:* ${location}\n\n*ORDER DETAILS*\n`;
+
+  cart.forEach((i,n)=>{
+    message+=`\n${n+1}. ${i.name}\nSize: ${i.size}\nColour: ${i.colour}\nQuantity: ${i.quantity}\nPrice: ${money(i.price*i.quantity)}\n`;
+  });
+
+  message+=`\n*ORDER SUBTOTAL: ${money(total)}*\n\n*Additional instructions:* ${notes||"None"}\n\nPlease confirm availability, delivery charges and payment instructions.`;
+
+  window.open(`${WHATSAPP_URL}?text=${encodeURIComponent(message)}`,"_blank","noopener");
+});
+
+document.querySelectorAll(".nav-links a").forEach(a=>{
+  a.addEventListener("click",()=>{
+    document.getElementById("navLinks").classList.remove("open");
+  });
+});
+
+document.getElementById("year").textContent=new Date().getFullYear();
+
+renderProducts();
+renderCart();
+</script>
+
+</body>
+</html>
