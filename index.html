@@ -580,43 +580,164 @@ footer h3{
 }
 
 footer p,footer a{
-  color:rgba(255,255,255,.7);
+  color:rgba(255,255,255,.65);
   font-size:12px;
-  line-height:2;
+  line-height:2.1;
+  display:block;
 }
 
 footer a:hover{color:var(--gold)}
 
 .footer-bottom{
-  border-top:1px solid rgba(255,255,255,.15);
+  max-width:1300px;
+  margin:auto;
   padding-top:22px;
-  text-align:center;
+  border-top:1px solid rgba(255,255,255,.15);
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
   color:rgba(255,255,255,.5);
   font-size:10px;
-  letter-spacing:1px;
+}
+
+/* CART */
+.cart-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  z-index:100;
+  display:none;
+}
+
+.cart-overlay.open{display:block}
+
+.cart-panel{
+  position:absolute;
+  right:0;
+  top:0;
+  height:100%;
+  width:min(440px,100%);
+  background:var(--cream);
+  padding:28px;
+  overflow-y:auto;
+}
+
+.cart-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid var(--border);
+  padding-bottom:20px;
+}
+
+.cart-header h2{
+  font:400 25px 'Playfair Display';
+  color:var(--green);
+}
+
+.close-cart{
+  border:0;
+  background:none;
+  font-size:25px;
+  color:var(--green);
+}
+
+.cart-items{padding:20px 0}
+
+.cart-item{
+  display:grid;
+  grid-template-columns:75px 1fr;
+  gap:15px;
+  padding:15px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.cart-item img{
+  width:75px;
+  height:95px;
+  object-fit:cover;
+}
+
+.cart-item h4{
+  color:var(--green);
+  font:500 17px 'Playfair Display';
+  margin-bottom:6px;
+}
+
+.cart-item p{
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:7px;
+}
+
+.quantity-controls{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:8px;
+}
+
+.quantity-controls button{
+  width:25px;
+  height:25px;
+  background:transparent;
+  border:1px solid var(--border);
+}
+
+.remove-item{
+  border:0;
+  background:none;
+  color:#9B5147;
+  font-size:10px;
+  margin-top:8px;
+}
+
+.cart-total{
+  display:flex;
+  justify-content:space-between;
+  font-weight:bold;
+  padding:20px 0;
+  border-top:1px solid var(--border);
+  color:var(--green);
+}
+
+.checkout-button{
+  width:100%;
+  background:var(--green);
+  color:white;
+  padding:17px;
+  border:0;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:10px;
+}
+
+.empty-cart{
+  text-align:center;
+  padding:50px 10px;
+  color:var(--muted);
+  font-size:13px;
 }
 
 /* MODALS */
 .modal{
   position:fixed;
   inset:0;
+  z-index:120;
   background:rgba(0,0,0,.65);
-  z-index:100;
   display:none;
-  align-items:center;
-  justify-content:center;
+  place-items:center;
   padding:20px;
 }
 
-.modal.open{display:flex}
+.modal.open{display:grid}
 
 .modal-content{
-  width:min(100%,520px);
-  max-height:90vh;
-  overflow:auto;
+  width:min(480px,100%);
   background:var(--cream);
-  padding:35px;
-  position:relative;
+  padding:30px;
+  max-height:90vh;
+  overflow-y:auto;
 }
 
 .modal-content h2{
@@ -626,201 +747,57 @@ footer a:hover{color:var(--gold)}
 }
 
 .modal-content>p{
-  font-size:12px;
   color:var(--muted);
-  line-height:1.7;
+  font-size:12px;
   margin-bottom:20px;
+  line-height:1.7;
 }
 
-.form-group{margin-bottom:16px}
+.form-field{margin-bottom:15px}
 
-.form-group label{
+.form-field label{
   display:block;
   font-size:10px;
   text-transform:uppercase;
   letter-spacing:1px;
-  color:var(--green);
   margin-bottom:7px;
+  color:var(--green);
 }
 
-.form-group input,.form-group select,.form-group textarea{
+.form-field input,.form-field select,.form-field textarea{
   width:100%;
   border:1px solid var(--border);
   background:white;
   padding:13px;
-  outline:none;
+  outline:0;
   font-size:12px;
 }
 
-.form-group textarea{min-height:85px;resize:vertical}
-
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
-  border-color:var(--gold);
+.form-field textarea{
+  min-height:75px;
+  resize:vertical;
 }
 
-.form-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{
+  border-color:var(--gold);
 }
 
 .form-actions{
   display:flex;
   gap:10px;
-  margin-top:22px;
+  margin-top:20px;
 }
 
-.checkout-button{
-  flex:1;
-  background:var(--green);
-  color:white;
-  border:0;
-  padding:15px;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-}
+.form-actions button{flex:1}
 
-.checkout-button:hover{background:var(--gold);color:var(--dark)}
-
-.secondary-button{
-  flex:1;
+.cancel-button{
   background:transparent;
-  color:var(--green);
   border:1px solid var(--green);
+  color:var(--green);
   padding:15px;
   font-size:10px;
   text-transform:uppercase;
-  letter-spacing:1.5px;
-}
-
-/* PRODUCT MODAL */
-.product-modal-price{
-  color:var(--gold);
-  font-weight:bold;
-  margin-bottom:20px;
-}
-
-.quantity-input{max-width:120px}
-
-/* CART */
-.cart-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.5);
-  z-index:110;
-  display:none;
-  justify-content:flex-end;
-}
-
-.cart-overlay.open{display:flex}
-
-.cart-panel{
-  width:min(100%,450px);
-  height:100%;
-  background:var(--cream);
-  padding:30px;
-  overflow:auto;
-}
-
-.cart-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid var(--border);
-  padding-bottom:20px;
-}
-
-.cart-header h2{
-  font:400 28px 'Playfair Display';
-  color:var(--green);
-}
-
-.close-button{
-  background:none;
-  border:0;
-  font-size:25px;
-  color:var(--green);
-}
-
-.cart-item{
-  display:grid;
-  grid-template-columns:90px 1fr;
-  gap:15px;
-  padding:20px 0;
-  border-bottom:1px solid var(--border);
-}
-
-.cart-item img{
-  width:90px;
-  height:110px;
-  object-fit:cover;
-}
-
-.cart-item h4{
-  font:400 17px 'Playfair Display';
-  color:var(--green);
-}
-
-.cart-item p{
-  color:var(--muted);
-  font-size:11px;
-  margin:6px 0;
-}
-
-.cart-item strong{font-size:12px}
-
-.quantity-controls{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-top:10px;
-}
-
-.quantity-controls button{
-  width:25px;
-  height:25px;
-  border:1px solid var(--border);
-  background:white;
-}
-
-.quantity-controls span{font-size:12px}
-
-.remove-item{
-  background:none;
-  border:0;
-  color:#9A5146;
-  font-size:10px;
-  text-decoration:underline;
-  margin-top:8px;
-}
-
-.cart-total{
-  display:flex;
-  justify-content:space-between;
-  padding:22px 0;
-  border-top:1px solid var(--border);
-  font-size:14px;
-  font-weight:bold;
-}
-
-.cart-checkout{
-  width:100%;
-  background:var(--green);
-  color:white;
-  border:0;
-  padding:17px;
-  font-size:10px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
-
-.empty-cart{
-  text-align:center;
-  color:var(--muted);
-  padding:60px 10px;
-  font-size:13px;
-  line-height:1.8;
+  letter-spacing:1px;
 }
 
 /* TOAST */
@@ -878,88 +855,132 @@ footer a:hover{color:var(--gold)}
   margin-top:18px;
 }
 
-/* FLOATING WHATSAPP */
+/* WHATSAPP BUTTON */
 .whatsapp-float{
   position:fixed;
-  right:25px;
-  bottom:25px;
-  width:58px;
-  height:58px;
+  bottom:22px;
+  right:22px;
+  z-index:80;
+  background:#187A48;
+  color:white;
+  width:56px;
+  height:56px;
   border-radius:50%;
-  background:#20C767;
   display:grid;
   place-items:center;
-  z-index:80;
   box-shadow:0 5px 20px rgba(0,0,0,.2);
+  transition:transform .2s;
 }
+
+.whatsapp-float:hover{transform:translateY(-3px)}
 
 .whatsapp-float svg{
-  width:31px;
-  height:31px;
-  fill:white;
+  width:29px;
+  height:29px;
+  fill:currentColor;
 }
 
-/* RESPONSIVE */
-@media(max-width:950px){
-  .nav-links{gap:15px}
-  .nav-links a{font-size:9px}
-  .brand-logo{width:65px;height:60px}
-  .brand-name{font-size:21px}
-  .values-grid{grid-template-columns:repeat(3,1fr)}
-}
-
-@media(max-width:700px){
-  .announcement{font-size:8px;letter-spacing:1px}
-  .nav{min-height:72px;padding:10px 5%}
-  .brand{gap:8px}
-  .brand-logo{width:55px;height:52px}
-  .brand-name{font-size:18px;letter-spacing:1px}
-  .brand-tagline{font-size:7px;letter-spacing:1px}
-  .menu-button{display:block}
+/* TABLET */
+@media(max-width:850px){
   .nav-links{
     display:none;
     position:absolute;
     top:100%;
     left:0;
-    right:0;
+    width:100%;
     background:var(--green);
-    padding:20px 5%;
+    padding:25px;
     flex-direction:column;
     align-items:flex-start;
-    gap:20px;
-    border-top:1px solid rgba(255,255,255,.12);
   }
+
   .nav-links.open{display:flex}
-  .nav-links a{font-size:11px}
-  .nav-actions{gap:12px}
-  .cart-button{font-size:10px}
-  .hero{min-height:570px;padding:70px 7%;background-position:60% center}
-  .hero h1{font-size:52px}
-  .section{padding:70px 6%}
-  .collections{grid-template-columns:1fr}
-  .collection-card,.collection-card img{min-height:390px}
-  .products{grid-template-columns:repeat(2,1fr);gap:25px 12px}
-  .product-info h3{font-size:16px}
-  .product-bottom{align-items:flex-start;flex-direction:column}
-  .add-button{width:100%}
+  .menu-button{display:block}
+  .products{grid-template-columns:repeat(2,1fr)}
   .craft-section{grid-template-columns:1fr}
-  .craft-image{min-height:350px}
-  .craft-content{padding:55px 8%}
-  .purpose-grid{grid-template-columns:1fr}
-  .values-grid{grid-template-columns:repeat(2,1fr)}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:30px}
-  .footer-grid>div:first-child{grid-column:1/-1}
-  .form-row{grid-template-columns:1fr}
-  .modal-content{padding:25px}
+  .craft-image{min-height:380px}
+  .craft-content{padding:60px 8%}
+  .values-grid{grid-template-columns:repeat(3,1fr)}
 }
 
-@media(max-width:400px){
-  .products{grid-template-columns:1fr}
-  .values-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-  .footer-grid>div:first-child{grid-column:auto}
-  .brand-logo{width:45px}
+/* MOBILE */
+@media(max-width:600px){
+  .nav{
+    min-height:76px;
+    padding:9px 4%;
+    gap:8px;
+  }
+
+  .brand{gap:9px}
+
+  .brand-logo{
+    width:60px;
+    height:55px;
+  }
+
+  .brand-name{
+    font-size:19px;
+    letter-spacing:1.5px;
+  }
+
+  .brand-tagline{
+    font-size:7px;
+    letter-spacing:1px;
+  }
+
+  .nav-links{gap:20px}
+  .nav-actions{gap:10px}
+  .cart-button{font-size:10px}
+
+  .hero{
+    min-height:570px;
+    padding:60px 7%;
+  }
+
+  .hero h1{font-size:52px}
+
+  .section{padding:65px 5%}
+
+  .collections{grid-template-columns:1fr}
+
+  .collection-card,.collection-card img{min-height:360px}
+
+  .products{gap:24px 12px}
+
+  .product-info h3{font-size:16px}
+
+  .product-bottom{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .add-button{width:100%}
+
+  .footer-grid{grid-template-columns:1fr 1fr}
+
+  .footer-grid>div:first-child{grid-column:1/-1}
+
+  .footer-bottom{flex-direction:column}
+
+  .purpose-grid{grid-template-columns:1fr}
+
+  .values-grid{grid-template-columns:1fr 1fr}
+
+  .foundation-table{font-size:11px}
+
+  .foundation-table th,.foundation-table td{padding:11px 9px}
+
+  .whatsapp-float{
+    bottom:15px;
+    right:15px;
+  }
+}
+
+@media(max-width:380px){
+  .brand-logo{width:49px;height:49px}
   .brand-name{font-size:16px}
+  .brand-tagline{font-size:6px;letter-spacing:.7px}
+  .brand{gap:7px}
 }
 </style>
 </head>
@@ -967,55 +988,60 @@ footer a:hover{color:var(--gold)}
 <body>
 
 <div class="announcement">
-  A considered approach to modern luxury · Euniq Fit
+  THOUGHTFULLY DESIGNED. BEAUTIFULLY MADE. · LUXURY IN EVERY DETAIL
 </div>
 
 <header>
-  <nav class="nav">
+<nav class="nav">
 
-    <a href="#home" class="brand">
-      <img class="brand-logo" src="Euniq Fit.png" alt="Euniq Fit logo"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-      <span class="brand-fallback">EF</span>
+  <a href="#" class="brand" aria-label="Euniq Fit home">
 
-      <span class="brand-copy">
-        <span class="brand-name">EUNIQ FIT</span>
-        <span class="brand-tagline">Luxury in Every Detail</span>
-      </span>
-    </a>
+    <img
+      class="brand-logo"
+      src="Euniq Fit.png"
+      alt="Euniq Fit monogram"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+    >
 
-    <div class="nav-links" id="navLinks">
-      <a href="#home">Home</a>
-      <a href="#collections">Collections</a>
-      <a href="#shop">Shop</a>
-      <a href="#story">Our Story</a>
-      <a href="#foundation">Our Foundation</a>
-      <a href="#contact">Contact</a>
+    <span class="brand-fallback">EF</span>
+
+    <div class="brand-copy">
+      <span class="brand-name">Euniq Fit</span>
+      <span class="brand-tagline">Luxury in Every Detail.</span>
     </div>
 
-    <div class="nav-actions">
-      <button class="cart-button" onclick="toggleCart(true)">
-        BAG <span class="cart-count" id="cartCount">0</span>
-      </button>
-      <button class="menu-button" onclick="toggleMenu()" aria-label="Open menu">☰</button>
-    </div>
+  </a>
 
-  </nav>
+  <div class="nav-links" id="navLinks">
+    <a href="#">Home</a>
+    <a href="#collections">Collections</a>
+    <a href="#shop">Shop</a>
+    <a href="#story">Our Story</a>
+    <a href="#foundation">Our Foundation</a>
+  </div>
+
+  <div class="nav-actions">
+    <button class="cart-button" onclick="toggleCart(true)">
+      BAG <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <button class="menu-button" onclick="toggleMenu()">☰</button>
+  </div>
+
+</nav>
 </header>
 
 <main>
 
 <!-- HERO -->
-<section class="hero" id="home">
+<section class="hero">
   <div class="hero-content">
-    <div class="eyebrow">The Euniq Fit Experience</div>
-    <h1>Luxury in Every Detail.</h1>
+    <div class="eyebrow">THE ART OF REFINED DRESSING</div>
+    <h1>Luxury in<br>Every Detail.</h1>
     <p>
-      Discover a considered expression of modern fashion.
-      Thoughtfully designed silhouettes, refined craftsmanship
-      and timeless pieces created for individuality.
+      Discover a world where thoughtful design meets exceptional craftsmanship.
+      Fashion created to express your individuality and elevate every moment.
     </p>
-    <a href="#shop" class="gold-button">Explore the Collection</a>
+    <a href="#shop" class="gold-button">Explore the collection</a>
   </div>
 </section>
 
@@ -1023,28 +1049,28 @@ footer a:hover{color:var(--gold)}
 <section class="section" id="collections">
 
   <div class="section-heading">
-    <div class="eyebrow">Discover Euniq Fit</div>
-    <h2>Designed for Every Expression</h2>
-    <p>Distinctive pieces. A shared appreciation for elegance.</p>
+    <div class="eyebrow">DISCOVER EUNIQ FIT</div>
+    <h2>Curated for your expression</h2>
+    <p>Distinctive pieces. Timeless character. Effortless confidence.</p>
   </div>
 
   <div class="collections">
 
     <div class="collection-card">
-      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85" alt="Women's fashion collection" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=85" alt="Women's fashion">
       <div class="collection-overlay">
-        <span>THE WOMEN'S EDIT</span>
-        <h3>For Her</h3>
-        <a href="#shop" onclick="setFilter('Women')">Discover the collection</a>
+        <span>EUNIQ FIT WOMEN</span>
+        <h3>The art of femininity</h3>
+        <a href="#shop" onclick="setFilter('Women')">Discover collection →</a>
       </div>
     </div>
 
     <div class="collection-card">
-      <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=1200&q=85" alt="Men's fashion collection" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=1000&q=85" alt="Men's fashion">
       <div class="collection-overlay">
-        <span>THE MEN'S EDIT</span>
-        <h3>For Him</h3>
-        <a href="#shop" onclick="setFilter('Men')">Discover the collection</a>
+        <span>EUNIQ FIT MEN</span>
+        <h3>Refined by design</h3>
+        <a href="#shop" onclick="setFilter('Men')">Discover collection →</a>
       </div>
     </div>
 
@@ -1052,27 +1078,27 @@ footer a:hover{color:var(--gold)}
 </section>
 
 <!-- SHOP -->
-<section class="shop-section" id="shop">
-  <div class="section">
+<div class="shop-section" id="shop">
+<section class="section">
 
-    <div class="section-heading">
-      <div class="eyebrow">The Collection</div>
-      <h2>Selected Pieces</h2>
-      <p>Explore pieces designed with intention and finished with care.</p>
-    </div>
-
-    <div class="filters">
-      <button class="filter-button active" onclick="setFilter('All',this)">All</button>
-      <button class="filter-button" onclick="setFilter('Women',this)">Women</button>
-      <button class="filter-button" onclick="setFilter('Men',this)">Men</button>
-      <button class="filter-button" onclick="setFilter('Heritage',this)">Heritage</button>
-      <button class="filter-button" onclick="setFilter('Unisex',this)">Unisex</button>
-    </div>
-
-    <div class="products" id="products"></div>
-
+  <div class="section-heading">
+    <div class="eyebrow">THE EUNIQ FIT EDIT</div>
+    <h2>Selected pieces</h2>
+    <p>Explore our latest expressions of style and craftsmanship.</p>
   </div>
+
+  <div class="filters">
+    <button class="filter-button active" onclick="setFilter('All',this)">All pieces</button>
+    <button class="filter-button" onclick="setFilter('Women',this)">Women</button>
+    <button class="filter-button" onclick="setFilter('Men',this)">Men</button>
+    <button class="filter-button" onclick="setFilter('Unisex',this)">Unisex</button>
+    <button class="filter-button" onclick="setFilter('Heritage',this)">Heritage</button>
+  </div>
+
+  <div class="products" id="products"></div>
+
 </section>
+</div>
 
 <!-- BRAND STORY -->
 <section class="craft-section" id="story">
@@ -1080,211 +1106,172 @@ footer a:hover{color:var(--gold)}
   <div class="craft-image" role="img" aria-label="Fashion craftsmanship"></div>
 
   <div class="craft-content">
-    <div class="eyebrow">The Euniq Fit Story</div>
-    <h2>True Luxury Lies in the Details.</h2>
+    <div class="eyebrow">THE EUNIQ FIT STORY</div>
+    <h2>More than fashion.<br>A standard of excellence.</h2>
 
-    <p>
-      EUNIQ FIT is a contemporary fashion brand built on the belief
-      that true luxury lies in the details.
-    </p>
+    <p>EUNIQ FIT is a contemporary fashion brand built on the belief that true luxury lies in the details.</p>
 
-    <p>
-      We bring together modern design, refined aesthetics and
-      exceptional craftsmanship to create timeless fashion for
-      men and women.
-    </p>
+    <p>We bring together modern design, refined aesthetics and exceptional craftsmanship to create timeless fashion for men and women.</p>
 
-    <p>
-      Inspired by both international fashion and contemporary
-      African creativity, we celebrate individuality through
-      thoughtfully designed garments, distinctive silhouettes
-      and meticulous finishing.
-    </p>
+    <p>Inspired by both international fashion and contemporary African creativity, we celebrate individuality through thoughtfully designed garments, distinctive silhouettes and meticulous finishing.</p>
 
-    <p>
-      We believe luxury should go beyond appearance. It should be
-      experienced through quality, comfort, confidence and
-      attention to detail.
-    </p>
+    <p>We believe luxury should go beyond appearance. It should be experienced through quality, comfort, confidence and attention to detail.</p>
 
-    <p>
-      Every design reflects our passion for fashion and our
-      commitment to excellence.
-    </p>
+    <p>Every design reflects our passion for fashion and our commitment to excellence.</p>
 
-    <div class="brand-signoff">EUNIQ FIT</div>
-    <div class="eyebrow">Luxury in Every Detail.</div>
+    <div class="brand-signoff">Euniq Fit — Luxury in Every Detail.</div>
   </div>
 
 </section>
 
 <!-- BRAND FOUNDATION -->
 <section class="foundation" id="foundation">
-  <div class="section">
+<div class="section">
 
-    <div class="section-heading">
-      <div class="eyebrow">What Defines Us</div>
-      <h2>Our Brand Foundation</h2>
-      <p>The principles and purpose behind every Euniq Fit creation.</p>
-    </div>
+  <div class="section-heading">
+    <div class="eyebrow">WHAT DEFINES US</div>
+    <h2>Our brand foundation</h2>
+    <p>The purpose, principles and identity behind every Euniq Fit creation.</p>
+  </div>
 
-    <div class="purpose-grid">
+  <div class="purpose-grid">
 
-      <div class="purpose-card">
-        <div class="eyebrow">Our Purpose</div>
-        <h3>Our Mission</h3>
-        <p>
-          To create beautifully designed, quality fashion that makes
-          elegance, confidence and individuality accessible.
-        </p>
-      </div>
+    <article class="purpose-card">
+      <div class="eyebrow">OUR PURPOSE</div>
+      <h3>Our Mission</h3>
+      <p>To create beautifully designed, quality fashion that makes elegance, confidence and individuality accessible.</p>
+    </article>
 
-      <div class="purpose-card">
-        <div class="eyebrow">Our Ambition</div>
-        <h3>Our Vision</h3>
-        <p>
-          To become a globally recognized fashion house known for
-          timeless design, exceptional craftsmanship and distinctive identity.
-        </p>
-      </div>
-
-    </div>
-
-    <h3 class="values-title">Our Core Values</h3>
-
-    <div class="values-grid">
-
-      <div class="value-card">
-        <span>01</span>
-        <h4>Craftsmanship</h4>
-        <p>Excellence in every stitch.</p>
-      </div>
-
-      <div class="value-card">
-        <span>02</span>
-        <h4>Elegance</h4>
-        <p>Beauty through simplicity.</p>
-      </div>
-
-      <div class="value-card">
-        <span>03</span>
-        <h4>Quality</h4>
-        <p>Never compromising on standards.</p>
-      </div>
-
-      <div class="value-card">
-        <span>04</span>
-        <h4>Individuality</h4>
-        <p>Celebrating personal expression.</p>
-      </div>
-
-      <div class="value-card">
-        <span>05</span>
-        <h4>Innovation</h4>
-        <p>Continuously evolving through creativity.</p>
-      </div>
-
-    </div>
-
-    <div class="foundation-table-wrap">
-      <h3>The Euniq Fit Identity</h3>
-
-      <table class="foundation-table">
-        <thead>
-          <tr>
-            <th>Brand Element</th>
-            <th>Our Identity</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Brand Name</td><td>Euniq Fit</td></tr>
-          <tr><td>Industry</td><td>Fashion and Apparel</td></tr>
-          <tr><td>Positioning</td><td>Affordable Luxury</td></tr>
-          <tr><td>Audience</td><td>Men and Women</td></tr>
-          <tr><td>Aesthetic</td><td>Modern Minimalist</td></tr>
-          <tr><td>Inspiration</td><td>International and Contemporary African Fashion</td></tr>
-          <tr><td>Signature</td><td>Refined Craftsmanship and Attention to Detail</td></tr>
-          <tr><td>Brand Colours</td><td>Forest Green and Solid Gold</td></tr>
-          <tr><td>Slogan</td><td>Luxury in Every Detail.</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <article class="purpose-card">
+      <div class="eyebrow">OUR AMBITION</div>
+      <h3>Our Vision</h3>
+      <p>To become a globally recognized fashion house known for timeless design, exceptional craftsmanship and distinctive identity.</p>
+    </article>
 
   </div>
+
+  <h3 class="values-title">Our Core Values</h3>
+
+  <div class="values-grid">
+    <article class="value-card"><span>01</span><h4>Craftsmanship</h4><p>Excellence in every stitch.</p></article>
+    <article class="value-card"><span>02</span><h4>Elegance</h4><p>Beauty through simplicity.</p></article>
+    <article class="value-card"><span>03</span><h4>Quality</h4><p>Never compromising on standards.</p></article>
+    <article class="value-card"><span>04</span><h4>Individuality</h4><p>Celebrating personal expression.</p></article>
+    <article class="value-card"><span>05</span><h4>Innovation</h4><p>Continuously evolving through creativity.</p></article>
+  </div>
+
+  <div class="foundation-table-wrap">
+    <h3>Our Brand at a Glance</h3>
+
+    <table class="foundation-table">
+      <thead>
+        <tr><th>Element</th><th>Brand definition</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Brand name</td><td>Euniq Fit</td></tr>
+        <tr><td>Industry</td><td>Fashion and apparel</td></tr>
+        <tr><td>Positioning</td><td>Affordable luxury</td></tr>
+        <tr><td>Audience</td><td>Men and women</td></tr>
+        <tr><td>Aesthetic</td><td>Modern minimalist</td></tr>
+        <tr><td>Inspiration</td><td>International and contemporary African fashion</td></tr>
+        <tr><td>Signature</td><td>Refined craftsmanship and attention to detail</td></tr>
+        <tr><td>Primary colours</td><td>Forest green #1B3E30 and solid gold</td></tr>
+        <tr><td>Slogan</td><td>Luxury in Every Detail.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
 </section>
 
-<!-- NEWSLETTER / CONTACT -->
-<section class="newsletter" id="contact">
-  <div class="eyebrow">Begin Your Euniq Fit Experience</div>
-  <h2>Connect With Us</h2>
-  <p>
-    For enquiries, custom orders and assistance, our team would be
-    delighted to hear from you.
-  </p>
+<!-- CONNECT -->
+<section class="newsletter">
+  <div class="eyebrow">BE PART OF OUR WORLD</div>
+  <h2>Stay connected.</h2>
+  <p>Follow Euniq Fit for new collections, styling inspiration and enquiries.</p>
   <button onclick="openSocials()">Connect with us</button>
 </section>
 
 </main>
 
 <!-- FOOTER -->
-<footer>
+<footer id="contact">
+
   <div class="footer-grid">
 
     <div>
-      <h3>EUNIQ FIT</h3>
-      <p>
-        A contemporary fashion house bringing together modern design,
-        refined aesthetics and exceptional craftsmanship.
-      </p>
-      <p style="color:var(--gold);margin-top:12px;font-family:'Playfair Display';font-size:17px">
-        Luxury in Every Detail.
-      </p>
+      <h3>Euniq Fit</h3>
+      <p>Luxury in Every Detail.</p>
+      <p>Contemporary fashion shaped by thoughtful design, individuality and exceptional craftsmanship.</p>
     </div>
 
     <div>
       <h3>Explore</h3>
-      <p><a href="#collections">Collections</a></p>
-      <p><a href="#shop">Shop</a></p>
-      <p><a href="#story">Our Story</a></p>
-      <p><a href="#foundation">Our Foundation</a></p>
+      <a href="#shop">Shop all</a>
+      <a href="#collections">Collections</a>
+      <a href="#story">Our story</a>
+      <a href="#foundation">Our foundation</a>
     </div>
 
     <div>
-      <h3>Contact</h3>
-      <p><a href="https://wa.me/233533750626" target="_blank" rel="noopener">WhatsApp</a></p>
-      <p><a href="#contact" onclick="openSocials()">Social Media</a></p>
+      <h3>Connect</h3>
+      <a href="#" onclick="openSocials();return false">Our social platforms</a>
+      <a href="https://wa.me/233533750626?text=Hello%20EUNIQ%20FIT%2C%20I%27d%20love%20to%20make%20an%20enquiry." target="_blank" rel="noopener">WhatsApp us</a>
     </div>
 
   </div>
 
   <div class="footer-bottom">
-    © <span id="year"></span> EUNIQ FIT. ALL RIGHTS RESERVED.
+    <span>© <span id="year"></span> Euniq Fit. All rights reserved.</span>
+    <span>CRAFTED WITH PURPOSE. WORN WITH CONFIDENCE.</span>
   </div>
+
 </footer>
 
-<!-- PRODUCT OPTIONS MODAL -->
+<!-- SHOPPING CART -->
+<div class="cart-overlay" id="cartOverlay" onclick="outsideCart(event)">
+  <div class="cart-panel">
+
+    <div class="cart-header">
+      <h2>Your shopping bag</h2>
+      <button class="close-cart" onclick="toggleCart(false)">×</button>
+    </div>
+
+    <div class="cart-items" id="cartItems"></div>
+
+    <div class="cart-total">
+      <span>Subtotal</span>
+      <span id="cartTotal">GH₵0.00</span>
+    </div>
+
+    <button class="checkout-button" onclick="openCheckout()">Continue to order</button>
+
+  </div>
+</div>
+
+<!-- PRODUCT OPTIONS -->
 <div class="modal" id="productModal">
   <div class="modal-content">
 
     <h2 id="modalProductName">Product name</h2>
-    <div class="product-modal-price" id="modalProductPrice"></div>
+    <p id="modalProductPrice"></p>
 
-    <div class="form-group">
-      <label for="productSize">Select Size</label>
+    <div class="form-field">
+      <label for="productSize">Select size</label>
       <select id="productSize">
-        <option value="">Choose a size</option>
+        <option value="">Choose your size</option>
         <option>XS</option>
         <option>S</option>
         <option>M</option>
         <option>L</option>
         <option>XL</option>
         <option>XXL</option>
-        <option>Custom Size</option>
+        <option>Custom size</option>
       </select>
     </div>
 
-    <div class="form-group">
-      <label for="productColour">Select Colour</label>
+    <div class="form-field">
+      <label for="productColour">Select colour</label>
       <select id="productColour">
         <option value="">Choose a colour</option>
         <option>Black</option>
@@ -1292,41 +1279,19 @@ footer a:hover{color:var(--gold)}
         <option>Forest Green</option>
         <option>Gold</option>
         <option>Brown</option>
-        <option>Blue</option>
-        <option>Other / To be confirmed</option>
+        <option>Other / Custom</option>
       </select>
     </div>
 
-    <div class="form-group">
+    <div class="form-field">
       <label for="productQuantity">Quantity</label>
-      <input class="quantity-input" type="number" id="productQuantity" min="1" value="1">
+      <input type="number" id="productQuantity" min="1" value="1">
     </div>
 
     <div class="form-actions">
-      <button class="secondary-button" onclick="closeProductModal()">Cancel</button>
+      <button class="cancel-button" onclick="closeProductModal()">Cancel</button>
       <button class="checkout-button" onclick="confirmAddToCart()">Add to bag</button>
     </div>
-
-  </div>
-</div>
-
-<!-- CART -->
-<div class="cart-overlay" id="cartOverlay" onclick="outsideCart(event)">
-  <div class="cart-panel">
-
-    <div class="cart-header">
-      <h2>Your Shopping Bag</h2>
-      <button class="close-button" onclick="toggleCart(false)" aria-label="Close cart">×</button>
-    </div>
-
-    <div id="cartItems"></div>
-
-    <div class="cart-total">
-      <span>Subtotal</span>
-      <span id="cartTotal">GH₵0.00</span>
-    </div>
-
-    <button class="cart-checkout" onclick="openCheckout()">Proceed to checkout</button>
 
   </div>
 </div>
@@ -1335,40 +1300,38 @@ footer a:hover{color:var(--gold)}
 <div class="modal" id="checkoutModal">
   <div class="modal-content">
 
-    <h2>Complete Your Enquiry</h2>
-    <p>Enter your details and send your order enquiry directly to Euniq Fit on WhatsApp.</p>
+    <h2>Complete your order</h2>
+    <p>Enter your details. We'll prepare your order enquiry for EUNIQ FIT.</p>
 
     <form id="checkoutForm">
 
-      <div class="form-group">
-        <label for="customerName">Full Name</label>
-        <input type="text" id="customerName" required placeholder="Your full name">
+      <div class="form-field">
+        <label for="customerName">Full name</label>
+        <input id="customerName" required placeholder="Your full name">
       </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label for="customerPhone">Phone Number</label>
-          <input type="tel" id="customerPhone" required placeholder="Your phone number">
-        </div>
-
-        <div class="form-group">
-          <label for="customerEmail">Email Address</label>
-          <input type="email" id="customerEmail" placeholder="Your email address">
-        </div>
+      <div class="form-field">
+        <label for="customerPhone">Phone / WhatsApp</label>
+        <input id="customerPhone" type="tel" required placeholder="+233...">
       </div>
 
-      <div class="form-group">
-        <label for="customerLocation">Delivery Location</label>
-        <input type="text" id="customerLocation" required placeholder="Town / City / Area">
+      <div class="form-field">
+        <label for="customerEmail">Email address</label>
+        <input id="customerEmail" type="email" placeholder="you@example.com">
       </div>
 
-      <div class="form-group">
-        <label for="customerNotes">Additional Instructions</label>
-        <textarea id="customerNotes" placeholder="Any special requests or details?"></textarea>
+      <div class="form-field">
+        <label for="customerLocation">Delivery location</label>
+        <input id="customerLocation" required placeholder="Town, city, country">
+      </div>
+
+      <div class="form-field">
+        <label for="customerNotes">Additional instructions</label>
+        <textarea id="customerNotes" placeholder="Delivery preferences, custom measurements, etc."></textarea>
       </div>
 
       <div class="form-actions">
-        <button type="button" class="secondary-button" onclick="closeCheckout()">Back</button>
+        <button type="button" class="cancel-button" onclick="closeCheckout()">Back</button>
         <button type="submit" class="checkout-button">Send order enquiry</button>
       </div>
 
@@ -1389,30 +1352,30 @@ footer a:hover{color:var(--gold)}
         <img class="social-icon" src="whatsapp.png" alt="WhatsApp logo"> WhatsApp
       </a>
 
-      <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noopener">
+      <a class="social-link" href="https://www.instagram.com/ahbenapokua?fqnt=MWJvemZ3OHlyZTVqcA%3D%3D&utm_source=qr" target="_blank" rel="noopener">
         <img class="social-icon" src="instagram.png" alt="Instagram logo"> Instagram
       </a>
 
-      <a class="social-link" href="https://www.snapchat.com/" target="_blank" rel="noopener">
+      <a class="social-link" href="https://snapchat.com/t/pKkHjGtS" target="_blank" rel="noopener">
         <img class="social-icon" src="snapchat.png" alt="Snapchat logo"> Snapchat
       </a>
 
-      <a class="social-link" href="https://www.tiktok.com/" target="_blank" rel="noopener">
+      <a class="social-link" href="https://www.tiktok.com/@abenasdesk1?_r=1&_t=ZS-9BXh7xlsj5B" target="_blank" rel="noopener">
         <img class="social-icon" src="tiktok.png" alt="TikTok logo"> TikTok
       </a>
 
-      <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noopener">
+      <a class="social-link" href="https://www.facebook.com/share/1J4WZnntN1/?mibextid=wwXIfr" target="_blank" rel="noopener">
         <img class="social-icon" src="facebook.png" alt="Facebook logo"> Facebook
       </a>
 
-      <a class="social-link" href="https://mail.google.com/" target="_blank" rel="noopener">
+      <a class="social-link" href="mailto:eunicedede87@gmail.com">
         <img class="social-icon" src="gmail.png" alt="Gmail logo"> Gmail
       </a>
 
     </div>
 
     <p class="social-note">
-      WhatsApp is connected to our business number. Facebook, Instagram, Snapchat and TikTok are temporary links until you provide your official profiles. Gmail opens Google Mail; provide your official business email address to connect it directly.
+      WhatsApp is connected to our business number. Facebook, Instagram, Snapchat and TikTok link directly to our social profiles. Select Gmail to send us an email at eunicedede87@gmail.com.
     </p>
 
     <div class="form-actions">
