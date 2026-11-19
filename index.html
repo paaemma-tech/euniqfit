@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +62,6 @@ header{
   gap:25px;
 }
 
-/* BRAND LOGO + WORDMARK */
 .brand{
   display:flex;
   align-items:center;
@@ -530,32 +530,77 @@ header{
   width:30%;
 }
 
-/* NEWSLETTER */
+/* STAY CONNECTED — BLURRED EDITORIAL BACKGROUND */
 .newsletter{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
   text-align:center;
-  padding:90px 20px;
-  background:var(--cream);
+  padding:110px 20px;
+  background:var(--green);
+  color:white;
+}
+
+.newsletter::before{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:-18px;
+  background:
+    url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=2000&q=90')
+    center 45%/cover no-repeat;
+  filter:blur(7px) brightness(.62) saturate(.8);
+  transform:scale(1.06);
+}
+
+.newsletter::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  background:
+    linear-gradient(
+      110deg,
+      rgba(16,41,31,.91),
+      rgba(27,62,48,.78),
+      rgba(16,41,31,.91)
+    );
+}
+
+.newsletter .eyebrow{
+  color:var(--gold);
+  margin-bottom:20px;
+  letter-spacing:5px;
 }
 
 .newsletter h2{
-  font:400 40px 'Playfair Display';
-  color:var(--green);
+  font:400 clamp(36px,5vw,52px) 'Playfair Display';
+  color:#fff;
+  margin-bottom:14px;
 }
 
 .newsletter p{
-  color:var(--muted);
-  margin:13px auto 25px;
+  color:rgba(255,255,255,.83);
+  margin:0 auto 30px;
   font-size:13px;
+  line-height:1.8;
+  max-width:500px;
 }
 
 .newsletter button{
-  background:var(--green);
-  color:white;
-  padding:15px 25px;
+  background:var(--gold);
+  color:var(--dark);
+  padding:16px 30px;
   font-size:10px;
   letter-spacing:2px;
   text-transform:uppercase;
-  border:0;
+  border:1px solid var(--gold);
+  transition:all .3s ease;
+}
+
+.newsletter button:hover{
+  background:transparent;
+  color:var(--gold);
 }
 
 /* FOOTER */
@@ -800,22 +845,6 @@ footer a:hover{color:var(--gold)}
   letter-spacing:1px;
 }
 
-/* TOAST */
-.toast{
-  position:fixed;
-  bottom:85px;
-  left:50%;
-  transform:translateX(-50%);
-  background:var(--dark);
-  color:white;
-  padding:13px 22px;
-  font-size:12px;
-  z-index:150;
-  display:none;
-}
-
-.toast.show{display:block}
-
 /* SOCIAL LINKS */
 .social-grid{
   display:grid;
@@ -839,7 +868,6 @@ footer a:hover{color:var(--gold)}
   color:var(--dark);
 }
 
-/* SOCIAL LOGO IMAGES */
 .social-icon{
   width:30px;
   height:30px;
@@ -974,6 +1002,17 @@ footer a:hover{color:var(--gold)}
     bottom:15px;
     right:15px;
   }
+
+  .newsletter{
+    padding:85px 22px;
+  }
+
+  .newsletter::before{
+    background-position:center;
+    filter:blur(6px) brightness(.55) saturate(.75);
+  }
+
+  .newsletter h2{font-size:38px}
 }
 
 @media(max-width:380px){
@@ -995,21 +1034,17 @@ footer a:hover{color:var(--gold)}
 <nav class="nav">
 
   <a href="#" class="brand" aria-label="Euniq Fit home">
-
     <img
       class="brand-logo"
       src="Euniq Fit.png"
       alt="Euniq Fit monogram"
       onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
     >
-
     <span class="brand-fallback">EF</span>
-
     <div class="brand-copy">
       <span class="brand-name">Euniq Fit</span>
       <span class="brand-tagline">Luxury in Every Detail.</span>
     </div>
-
   </a>
 
   <div class="nav-links" id="navLinks">
@@ -1047,7 +1082,6 @@ footer a:hover{color:var(--gold)}
 
 <!-- COLLECTIONS -->
 <section class="section" id="collections">
-
   <div class="section-heading">
     <div class="eyebrow">DISCOVER EUNIQ FIT</div>
     <h2>Curated for your expression</h2>
@@ -1055,7 +1089,6 @@ footer a:hover{color:var(--gold)}
   </div>
 
   <div class="collections">
-
     <div class="collection-card">
       <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=85" alt="Women's fashion">
       <div class="collection-overlay">
@@ -1073,14 +1106,12 @@ footer a:hover{color:var(--gold)}
         <a href="#shop" onclick="setFilter('Men')">Discover collection →</a>
       </div>
     </div>
-
   </div>
 </section>
 
 <!-- SHOP -->
 <div class="shop-section" id="shop">
 <section class="section">
-
   <div class="section-heading">
     <div class="eyebrow">THE EUNIQ FIT EDIT</div>
     <h2>Selected pieces</h2>
@@ -1096,13 +1127,11 @@ footer a:hover{color:var(--gold)}
   </div>
 
   <div class="products" id="products"></div>
-
 </section>
 </div>
 
 <!-- BRAND STORY -->
 <section class="craft-section" id="story">
-
   <div class="craft-image" role="img" aria-label="Fashion craftsmanship"></div>
 
   <div class="craft-content">
@@ -1110,18 +1139,13 @@ footer a:hover{color:var(--gold)}
     <h2>More than fashion.<br>A standard of excellence.</h2>
 
     <p>EUNIQ FIT is a contemporary fashion brand built on the belief that true luxury lies in the details.</p>
-
     <p>We bring together modern design, refined aesthetics and exceptional craftsmanship to create timeless fashion for men and women.</p>
-
     <p>Inspired by both international fashion and contemporary African creativity, we celebrate individuality through thoughtfully designed garments, distinctive silhouettes and meticulous finishing.</p>
-
     <p>We believe luxury should go beyond appearance. It should be experienced through quality, comfort, confidence and attention to detail.</p>
-
     <p>Every design reflects our passion for fashion and our commitment to excellence.</p>
 
     <div class="brand-signoff">Euniq Fit — Luxury in Every Detail.</div>
   </div>
-
 </section>
 
 <!-- BRAND FOUNDATION -->
@@ -1135,7 +1159,6 @@ footer a:hover{color:var(--gold)}
   </div>
 
   <div class="purpose-grid">
-
     <article class="purpose-card">
       <div class="eyebrow">OUR PURPOSE</div>
       <h3>Our Mission</h3>
@@ -1147,7 +1170,6 @@ footer a:hover{color:var(--gold)}
       <h3>Our Vision</h3>
       <p>To become a globally recognized fashion house known for timeless design, exceptional craftsmanship and distinctive identity.</p>
     </article>
-
   </div>
 
   <h3 class="values-title">Our Core Values</h3>
@@ -1162,7 +1184,6 @@ footer a:hover{color:var(--gold)}
 
   <div class="foundation-table-wrap">
     <h3>Our Brand at a Glance</h3>
-
     <table class="foundation-table">
       <thead>
         <tr><th>Element</th><th>Brand definition</th></tr>
@@ -1184,7 +1205,7 @@ footer a:hover{color:var(--gold)}
 </div>
 </section>
 
-<!-- CONNECT -->
+<!-- STAY CONNECTED -->
 <section class="newsletter">
   <div class="eyebrow">BE PART OF OUR WORLD</div>
   <h2>Stay connected.</h2>
@@ -1196,9 +1217,7 @@ footer a:hover{color:var(--gold)}
 
 <!-- FOOTER -->
 <footer id="contact">
-
   <div class="footer-grid">
-
     <div>
       <h3>Euniq Fit</h3>
       <p>Luxury in Every Detail.</p>
@@ -1218,20 +1237,17 @@ footer a:hover{color:var(--gold)}
       <a href="#" onclick="openSocials();return false">Our social platforms</a>
       <a href="https://wa.me/233533750626?text=Hello%20EUNIQ%20FIT%2C%20I%27d%20love%20to%20make%20an%20enquiry." target="_blank" rel="noopener">WhatsApp us</a>
     </div>
-
   </div>
 
   <div class="footer-bottom">
     <span>© <span id="year"></span> Euniq Fit. All rights reserved.</span>
     <span>CRAFTED WITH PURPOSE. WORN WITH CONFIDENCE.</span>
   </div>
-
 </footer>
 
 <!-- SHOPPING CART -->
 <div class="cart-overlay" id="cartOverlay" onclick="outsideCart(event)">
   <div class="cart-panel">
-
     <div class="cart-header">
       <h2>Your shopping bag</h2>
       <button class="close-cart" onclick="toggleCart(false)">×</button>
@@ -1245,14 +1261,12 @@ footer a:hover{color:var(--gold)}
     </div>
 
     <button class="checkout-button" onclick="openCheckout()">Continue to order</button>
-
   </div>
 </div>
 
 <!-- PRODUCT OPTIONS -->
 <div class="modal" id="productModal">
   <div class="modal-content">
-
     <h2 id="modalProductName">Product name</h2>
     <p id="modalProductPrice"></p>
 
@@ -1292,19 +1306,16 @@ footer a:hover{color:var(--gold)}
       <button class="cancel-button" onclick="closeProductModal()">Cancel</button>
       <button class="checkout-button" onclick="confirmAddToCart()">Add to bag</button>
     </div>
-
   </div>
 </div>
 
 <!-- CHECKOUT -->
 <div class="modal" id="checkoutModal">
   <div class="modal-content">
-
     <h2>Complete your order</h2>
     <p>Enter your details. We'll prepare your order enquiry for EUNIQ FIT.</p>
 
     <form id="checkoutForm">
-
       <div class="form-field">
         <label for="customerName">Full name</label>
         <input id="customerName" required placeholder="Your full name">
@@ -1334,7 +1345,6 @@ footer a:hover{color:var(--gold)}
         <button type="button" class="cancel-button" onclick="closeCheckout()">Back</button>
         <button type="submit" class="checkout-button">Send order enquiry</button>
       </div>
-
     </form>
   </div>
 </div>
@@ -1342,7 +1352,6 @@ footer a:hover{color:var(--gold)}
 <!-- SOCIAL MEDIA POPUP -->
 <div class="modal" id="socialModal" onclick="closeSocialsOutside(event)">
   <div class="modal-content">
-
     <h2>Connect with EUNIQ FIT</h2>
     <p>Choose your preferred platform. We'd love to hear from you.</p>
 
@@ -1375,13 +1384,12 @@ footer a:hover{color:var(--gold)}
     </div>
 
     <p class="social-note">
-      WhatsApp is connected to our business number. Facebook, Instagram, Snapchat and TikTok link directly to our social profiles. Select Gmail to send us an email at eunicedede87@gmail.com.
+      WhatsApp is connected to our business number. Facebook, Instagram, Snapchat and TikTok link directly to the supplied profiles. Select Gmail to send us an email at eunicedede87@gmail.com.
     </p>
 
     <div class="form-actions">
       <button class="checkout-button" onclick="closeSocials()">Close</button>
     </div>
-
   </div>
 </div>
 
@@ -1397,7 +1405,6 @@ footer a:hover{color:var(--gold)}
   <svg viewBox="0 0 32 32" aria-hidden="true">
     <path d="M16 .8A15 15 0 0 0 3.1 23.5L1 31l7.7-2A15 15 0 1 0 16 .8zm0 27.4a12.3 12.3 0 0 1-6.3-1.7l-.5-.3-4.6 1.2 1.2-4.5-.3-.5A12.3 12.3 0 1 1 16 28.2zm6.8-9.2c-.4-.2-2.2-1.1-2.5-1.2-.3-.1-.6-.2-.8.2-.2.4-1 1.2-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8l.6-.7c.2-.2.2-.4.4-.6.1-.2.1-.5 0-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.7.1-1 .5-.4.4-1.3 1.3-1.3 3.1s1.3 3.5 1.5 3.7c.2.2 2.6 4 6.3 5.6.9.4 1.6.6 2.1.7.9.3 1.7.2 2.3.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8-.1-.1-.4-.2-.8-.4z"/>
   </svg>
-
 </a>
 
 <script>
@@ -1480,7 +1487,6 @@ function renderProducts(){
 
   document.getElementById("products").innerHTML=shown.map(p=>`
     <article class="product-card">
-
       <div class="product-image">
         <img src="${p.image}" alt="${p.name}" loading="lazy">
         ${p.label?`<span class="product-label">${p.label}</span>`:""}
@@ -1497,7 +1503,6 @@ function renderProducts(){
           </button>
         </div>
       </div>
-
     </article>
   `).join("");
 }
@@ -1588,7 +1593,6 @@ function renderCart(){
   document.getElementById("cartItems").innerHTML=cart.length
     ?cart.map((i,n)=>`
       <div class="cart-item">
-
         <img src="${i.image}" alt="${i.name}">
 
         <div>
@@ -1604,7 +1608,6 @@ function renderCart(){
 
           <button class="remove-item" onclick="removeItem(${n})">Remove</button>
         </div>
-
       </div>
     `).join("")
     :'<div class="empty-cart">Your shopping bag is empty.<br><br>Discover something exceptional.</div>';
@@ -1716,13 +1719,11 @@ document.getElementById("checkoutForm").addEventListener("submit",function(event
   message+="*ORDER DETAILS*\n";
 
   cart.forEach((i,n)=>{
-
     message+=`\n${n+1}. ${i.name}\n`;
     message+=`Size: ${i.size}\n`;
     message+=`Colour: ${i.colour}\n`;
     message+=`Quantity: ${i.quantity}\n`;
     message+=`Price: ${money(i.price*i.quantity)}\n`;
-
   });
 
   message+=`\n*ORDER SUBTOTAL: ${money(total)}*\n`;
@@ -1739,11 +1740,9 @@ document.getElementById("checkoutForm").addEventListener("submit",function(event
 
 /* CLOSE MOBILE MENU AFTER NAVIGATION */
 document.querySelectorAll(".nav-links a").forEach(a=>{
-
   a.addEventListener("click",()=>{
     document.getElementById("navLinks").classList.remove("open");
   });
-
 });
 
 /* INITIALISE WEBSITE */
