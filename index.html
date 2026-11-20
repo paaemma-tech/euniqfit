@@ -554,7 +554,7 @@ footer a:hover{color:var(--gold)}
 .cart-header h2{font:400 25px 'Playfair Display';color:var(--green)}
 .close-cart{border:0;background:none;font-size:25px;color:var(--green)}
 .cart-items{padding:20px 0}
-.cart-item{display:grid;grid-template-columns:75px 1fr;gap:15px;padding:15px 0;border-bottom:1px solid var(--border)}
+.cart-item{display:grid;grid-template-columns:75px 1fr;gap:15px;padding:15px 0;border-bottom:1px solid var(--border}
 .cart-item img{width:75px;height:95px;object-fit:cover}
 .cart-item h4{color:var(--green);font:500 17px 'Playfair Display';margin-bottom:6px}
 .cart-item p{font-size:11px;color:var(--muted);margin-bottom:7px}
@@ -566,7 +566,7 @@ footer a:hover{color:var(--gold)}
 .empty-cart{text-align:center;padding:50px 10px;color:var(--muted);font-size:13px}
 
 /* MODALS */
-.modal{position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.65);display:none;place-items:center;padding:20px}
+.modal{position:fixed;inset:0;z-index:180;background:rgba(0,0,0,.65);display:none;place-items:center;padding:20px}
 .modal.open{display:grid}
 .modal-content{width:min(480px,100%);background:var(--cream);padding:30px;max-height:90vh;overflow-y:auto}
 .modal-content h2{font:400 30px 'Playfair Display';color:var(--green);margin-bottom:10px}
@@ -575,7 +575,7 @@ footer a:hover{color:var(--gold)}
 .form-field label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;color:var(--green)}
 .form-field input,.form-field select,.form-field textarea{width:100%;border:1px solid var(--border);background:white;padding:13px;outline:0;font-size:12px}
 .form-field textarea{min-height:75px;resize:vertical}
-.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--gold)}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--gold}
 .form-actions{display:flex;gap:10px;margin-top:20px}
 .form-actions button{flex:1}
 .cancel-button{background:transparent;border:1px solid var(--green);color:var(--green);padding:15px;font-size:10px;text-transform:uppercase;letter-spacing:1px}
@@ -997,7 +997,7 @@ footer a:hover{color:var(--gold)}
   <div class="modal-content">
     <h2 id="modalProductName">Product name</h2>
     <p id="modalProductPrice"></p>
-
+    
     <div class="form-field">
       <label for="productSize">Select size</label>
       <select id="productSize">
@@ -1005,16 +1005,10 @@ footer a:hover{color:var(--gold)}
         <option>XS</option><option>S</option><option>M</option>
         <option>L</option><option>XL</option><option>XXL</option>
         <option>Custom size</option><option>One size</option>
-      </select>
-    </div>
-
-    <div class="form-field">
-      <label for="productColour">Select colour</label>
-      <select id="productColour">
-        <option value="">Choose a colour</option>
-        <option>Black</option><option>White</option><option>Forest Green</option>
-        <option>Gold</option><option>Brown</option><option>Multicolour</option>
-        <option>Other / Custom</option>
+        <optgroup label="Numeric sizes">
+          <option>6</option><option>8</option><option>10</option><option>12</option>
+          <option>14</option><option>16</option><option>18</option><option>20</option>
+        </optgroup>
       </select>
     </div>
 
@@ -1263,10 +1257,10 @@ function openProductModal(id){
   document.getElementById("modalProductName").textContent=selectedProduct.name;
   document.getElementById("modalProductPrice").textContent=money(selectedProduct.price);
   document.getElementById("productSize").value="";
-  document.getElementById("productColour").value="";
   document.getElementById("productQuantity").value=1;
 
   document.getElementById("productModal").classList.add("open");
+  document.getElementById("productModal").scrollTop=0;
 }
 
 function closeProductModal(){
@@ -1277,11 +1271,10 @@ function closeProductModal(){
 function confirmAddToCart(){
 
   const size=document.getElementById("productSize").value;
-  const colour=document.getElementById("productColour").value;
   const quantity=Number(document.getElementById("productQuantity").value);
 
-  if(!size||!colour){
-    alert("Please select both size and colour.");
+  if(!size){
+    alert("Please select a size.");
     return;
   }
 
@@ -1291,13 +1284,13 @@ function confirmAddToCart(){
   }
 
   const existing=cart.find(i=>
-    i.id===selectedProduct.id&&i.size===size&&i.colour===colour
+    i.id===selectedProduct.id&&i.size===size
   );
 
   if(existing){
     existing.quantity+=quantity;
   }else{
-    cart.push({...selectedProduct,size,colour,quantity});
+    cart.push({...selectedProduct,size,quantity});
   }
 
   closeProductModal();
@@ -1320,7 +1313,7 @@ function renderCart(){
         <img src="${i.image}" alt="${i.name}">
         <div>
           <h4>${i.name}</h4>
-          <p>Size: ${i.size} · Colour: ${i.colour}</p>
+          <p>Size: ${i.size}</p>
           <strong>${money(i.price*i.quantity)}</strong>
           <div class="quantity-controls">
             <button onclick="changeQuantity(${n},-1)">−</button>
@@ -1415,7 +1408,6 @@ document.getElementById("checkoutForm").addEventListener("submit",function(event
     message+=`\n${n+1}. ${i.name}\n`;
     message+=`Collection: ${i.category}\n`;
     message+=`Size: ${i.size}\n`;
-    message+=`Colour: ${i.colour}\n`;
     message+=`Quantity: ${i.quantity}\n`;
     message+=`Price: ${money(i.price*i.quantity)}\n`;
   });
